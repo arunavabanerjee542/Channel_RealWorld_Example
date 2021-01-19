@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace YoutubeChannel
 {
@@ -6,7 +7,16 @@ namespace YoutubeChannel
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ContentCreator creator = new ContentCreator();
+            ContentValidator validator = new ContentValidator();
+            Channel<string> channel = new Channel<string>();
+
+            Task.WaitAll(creator.UploadVedio(channel), validator.ValidateContent(channel));
+               
+
+            Console.ReadLine();
+
+
         }
     }
 }
